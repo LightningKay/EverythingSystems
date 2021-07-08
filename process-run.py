@@ -1,8 +1,11 @@
 #! /usr/bin/env python
 
+#Author - Karthik Kolathumani CS240.
+
 import sys
 from optparse import OptionParser
 import random
+
 
 # process switch behavior
 SCHED_SWITCH_ON_IO = 'SWITCH_ON_IO'
