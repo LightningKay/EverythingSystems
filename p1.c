@@ -5,7 +5,7 @@
       This is an important distinction for the OS as the line int rc = fork() for the child process returns 0 while for 
       the parent process it returns the child PID.
    2) The non deterministic output -  Assuming that the program runs on a single core, we are able to unable to say which
-      process runs first. It depends on the scheduling policy both in single core and multi core CUPs.*/
+      process runs first. It depends on the scheduling policy both in single core and multi core CUPs. - Karthik Kolathumani*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
