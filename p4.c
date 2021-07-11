@@ -5,7 +5,7 @@ wc of the p3.c file is redirected to a file named newfile.txt instead of printin
 The shell closes the standard output and opens the newfile.txt.
 This program exactly does that - As we close the STDOUT_FILENO file descriptor, the output of printf() will be routed to the newly-opened file
 instead of the screen.
-(Pipes and Filters in Unix does the same thing, Output of one program is an input to another program(seprate child forked process)) */
+(Pipes and Filters in Unix does the same thing, Output of one program is an input to another program(seprate child forked process)) - Karthik Kolathumani */
 #include<stdio.h>
 #include<stdlib.h>
 #include<unistd.h>
