@@ -3,7 +3,7 @@ Write a program that calls fork().
 Before calling fork(), have the main process access a variable (e.g., x) and set its value to something (e.g., 100). 
 What value is the variable in the child process? What happens to the variable when both the child and parent change the value of x?
 Answer - The child process is a copy of the parent process, so it has COPY (not reference) of all the variables that the parent process has.
-Hence we see no change in the parent process when the sharedVaribale is altered at the child level.
+Hence we see no change in the parent process when the sharedVaribale is altered at the child level. - Karthik Kolathumani
 */
 #include <stdio.h>
 #include <stdlib.h>
