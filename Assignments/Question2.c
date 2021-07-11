@@ -5,7 +5,7 @@ What happens when they are writing to the file concurrently, i.e., at the same t
 Answers - I have observed multiple things here, When the parent closes the Standard output file descriptor, then the child and parent process just appends to the same file (the order depends on the CPU Scheduling for the processes).
 But if the file descriptor is closed again and opened a new file in the forked child process, then those appends are lost.
 This shows us that the parent cannot access the child process file descriptor returned by child open() system call.
-The child can access the same file descriptor returned by the parent.
+The child can access the same file descriptor returned by the parent. - Karthik Kolathumani
  */
 
 #include<stdio.h>
