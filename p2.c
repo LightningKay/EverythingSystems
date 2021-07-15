@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
-
 int main(int argc, char* argv[]){
     printf("This is parent process (pid:%d)\n", (int)getpid());
     fflush(stdout);
