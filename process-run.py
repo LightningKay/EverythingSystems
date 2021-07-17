@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-#Author - Karthik Kolathumani CS240.
+
 
 import sys
 from optparse import OptionParser
