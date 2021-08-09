@@ -1,0 +1,90 @@
+Memeory API Assignment 3
+
+Q 1) First, write a simple program called null.c that creates a pointer to an integer, sets it to NULL, and then tries to dereference it. 
+   Compile this into an executable called null. What happens when you run this program?
+A 1) It gives segmentation fault
+
+Q 2) Next, compile this program with symbol information included (with the -g flag). Doing so let’s put more information into the executable, enabling the debugger to access more useful information about variable names and the like. 
+     Run the program under the debugger by typing gdb null and then, once gdb is running, typing run. What does gdb show you?
+A 2) First compile using gcc null.c -o null -g.
+     Then run gdb null, once the GNU Debugger starts running type run - 
+     Starting program: /usr/local/educative/a.out 
+     warning: Error disabling address space randomization: Operation not permitted
+
+    Program received signal SIGSEGV, Segmentation fault.
+    0x00000000004004e6 in main () at null.c:4
+    4           *ptr = 8;
+
+Q 3) Finally, use the valgrind tool on this program. We’ll use the memcheck tool that is a part of valgrind to analyze what happens.
+     Run this by typing in the following: valgrind --leak-check=yes null. What happens when you run this? Can you interpret the output from the tool?
+A 3) ==59== Memcheck, a memory error detector
+     ==59== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+     ==59== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+     ==59== Command: ./null
+     ==59== 
+     ==59== Invalid write of size 4
+     ==59==    at 0x4004E6: main (null.c:4)
+     ==59==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+     ==59== 
+     ==59== 
+     ==59== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+     ==59==  Access not within mapped region at address 0x0
+     ==59==  at 0x4004E6: main (null.c:4)
+     ==59==  If you believe this happened as a result of a stack
+     ==59==  overflow in your program's main thread (unlikely but
+     ==59==  possible), you can try to increase the size of the
+     ==59==  main thread stack using the --main-stacksize= flag.
+     ==59==  The main thread stack size used in this run was 8388608.
+     ==59== 
+     ==59== HEAP SUMMARY:
+     ==59==     in use at exit: 0 bytes in 0 blocks
+     ==59==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+     ==59== 
+     ==59== All heap blocks were freed -- no leaks are possible
+     ==59== 
+     ==59== For counts of detected and suppressed errors, rerun with: -v
+     ==59== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+     Segmentation fault (core dumped)
+     The *ptr has not been assigned to the stack. means the *prt at address 0x0 doesnt belong to this program.
+
+Q 4) Write a simple program that allocates memory using malloc() but forgets to free it before exiting.
+     What happens when this program runs? Can you use gdb to find any problems with it? How about valgrind (again with the --leak-check=yes flag)?
+A 4) It runs fine. 
+     No.
+    ==204== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+    ==204== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+    ==204== Command: ./null
+    ==204== 
+    ==204== 
+    ==204== HEAP SUMMARY:
+    ==204==     in use at exit: 4 bytes in 1 blocks
+    ==204==   total heap usage: 1 allocs, 0 frees, 4 bytes allocated
+    ==204== 
+    ==204== 4 bytes in 1 blocks are definitely lost in loss record 1 of 1
+    ==204==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+    ==204==    by 0x400537: main (null.c:4)
+    ==204== 
+    ==204== LEAK SUMMARY:
+    ==204==    definitely lost: 4 bytes in 1 blocks
+    ==204==    indirectly lost: 0 bytes in 0 blocks
+    ==204==      possibly lost: 0 bytes in 0 blocks
+    ==204==    still reachable: 0 bytes in 0 blocks
+    ==204==         suppressed: 0 bytes in 0 blocks
+    ==204== 
+    ==204== For counts of detected and suppressed errors, rerun with: -v
+    ==204== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)    
+
+Q 5)  Write a program that creates an array of integers called data of size 100 using malloc; then, set data[100] to zero.
+      What happens when you run this program? What happens when you run this program using valgrind? Is the program correct?
+A 5) Nothing happens. Output seems correct.
+    ==49== HEAP SUMMARY:
+     ==49==     in use at exit: 400 bytes in 1 blocks
+     ==49==   total heap usage: 1 allocs, 0 frees, 400 bytes allocated
+     ==49== 
+     ==49== 400 bytes in 1 blocks are definitely lost in loss record 1 of 1
+     ==49==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+     ==49==    by 0x400537: main (null.c:5)  
+
+Q 6) Create a program that allocates an array of integers(as above), frees them, and then tries to print the value of one of the elements of the array.
+     Does the program run? What happens when you use valgrind on it?
+A 6) It runs with no error.     
